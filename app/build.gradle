@@ -1,0 +1,131 @@
+apply plugin: 'com.android.library'
+//apply plugin:  rootProject.ext.plugin.application
+apply plugin: 'com.getkeepsafe.dexcount'
+apply plugin: rootProject.ext.plugin.retrolambda
+apply plugin: rootProject.ext.plugin.butterknife
+apply plugin: rootProject.ext.plugin.butterknifeLib
+apply plugin: 'maven'
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "http://172.16.227.10:8081/nexus/content/repositories/snapshots"){
+                authentication(userName:"admin",password:"admin123")
+            }
+            pom.project {
+                version = '1.0-SNAPSHOT'
+                groupId = 'com.comba.android.combacommon'
+                artifactId = 'platform'
+            }
+
+        }
+    }
+}
+
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.2"
+    defaultConfig {
+//        applicationId "com.comba.android.combacommon"
+        minSdkVersion 15
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+//        ndk{
+//            abiFilter 'armeabi' //,'x86','armeabi-v7a','x86_64','arm64-v8a'
+//        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+
+    android {
+        lintOptions {
+            abortOnError false
+        }
+    }
+
+    productFlavors {
+    }
+//    sourceSets {
+//        main {
+//            manifest.srcFile  '/src/main/AndroidManifest.xml'
+//            java.srcDirs = ['src']
+//            resources.srcDirs = ['src']
+//            aidl.srcDirs = ['src']
+//            renderscript.srcDirs = ['src']
+//            res.srcDirs = ['res']
+//            assets.srcDirs = ['assets']
+//            jniLibs.srcDirs = ['libs']
+//        }
+//    }
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+}
+
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:24.0.1'
+    //    compile 'com.tencent.bugly:crashreport:latest.release'
+    //    compile 'com.tencent.bugly:nativecrashreport:latest.release'
+    compile 'com.orhanobut:logger:1.15'
+    testCompile 'junit:junit:4.12'
+    android {
+        defaultConfig {
+            testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        }
+    }
+    configurations.all {
+        resolutionStrategy.force 'com.android.support:support-annotations:24.0.0'
+    }
+    /**
+     * file caches
+     */
+    compile 'com.lifeofcoding:cacheutilslibrary:1.1.0@aar'
+    compile 'com.google.code.gson:gson:2.2.2'
+    compile 'commons-io:commons-io:2.4'
+    compile 'com.yanzhenjie.nohttp:nohttp:1.1.1'
+    compile 'com.yanzhenjie.nohttp:okhttp:1.1.1'
+    compile 'com.orhanobut:dialogplus:1.11@aar'
+    compile 'com.github.hss01248:DialogUtil:1.1.4'
+
+    compile 'org.greenrobot:eventbus:3.0.0'
+
+    compile rootProject.ext.dependencies.nohttp
+    compile rootProject.ext.dependencies.okhttp
+    // support.
+    compile rootProject.ext.dependencies.appcompat
+    compile rootProject.ext.dependencies.design
+    compile rootProject.ext.dependencies.recyclerview
+    compile rootProject.ext.dependencies.cardview
+    // json parser.
+    compile rootProject.ext.dependencies.fastjson
+    // circle image.
+    compile rootProject.ext.dependencies.circleimageview
+    // permission manager.
+    compile rootProject.ext.dependencies.permisson
+    // view bind
+    apt rootProject.ext.dependencies.butterknifeapt
+    compile rootProject.ext.dependencies.butterknife
+    compile files('libs/UPPayAssistEx.jar')
+    compile files('libs/UPPayPluginExPro.jar')
+}

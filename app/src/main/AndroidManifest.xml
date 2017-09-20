@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.comba.android.combacommon"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_LOGS"/>
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.NFC" />
+    <uses-feature android:name="android.hardware.nfc.hce"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="org.simalliance.openmobileapi.SMARTCARD" />
+
+
+
+    <uses-sdk   tools:overrideLibrary="android.support.test.uiautomator　,
+    android.support.test.uiautomator.v18" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"
+        />
+    <!-- 读联系人权限 -->
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <!-- 写联系人权限 -->
+    <uses-permission android:name="android.permission.WRITE_CONTACTS"/>
+
+    <application
+        android:name=".PlatFormApplication"
+        tools:overrideLibrary="com.comba.android.combacommon"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+        </activity>
+        <activity android:name=".net.HttpsActivity" >
+        </activity>
+        <activity android:name=".dialog.DialogSampleActivity" >
+        </activity>
+        <activity android:name=".net.httpAbout.ButterKnifeAnnnotionSampleActivity" >
+        </activity>
+        <activity android:name=".contacts.ContactRecordListActivity" >
+        </activity>
+
+        <!--银联支付-start- -->
+        <uses-library android:name="org.simalliance.openmobileapi" android:required="false"/>
+        <activity
+        android:name="com.unionpay.uppay.PayActivity"
+        android:label="@string/app_name"
+	    android:screenOrientation="portrait"
+	    android:configChanges="orientation|keyboardHidden"
+	    android:excludeFromRecents="true"
+        android:windowSoftInputMode="adjustResize"/>
+
+        <activity
+        android:name="com.unionpay.UPPayWapActivity"
+        android:configChanges="orientation|keyboardHidden"
+        android:screenOrientation="portrait"
+        android:windowSoftInputMode="adjustResize"/>
+        <!--银联支付-end->-->
+
+        <activity android:name=".pay.UPPayActivity"
+            android:theme="@style/themeTranslant"
+            >
+        </activity>
+    </application>
+
+</manifest>
